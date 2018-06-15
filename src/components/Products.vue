@@ -9,7 +9,7 @@
         <form class="form-inline" v-on:submit.prevent="onSubmit">
           <div class="form-group">
             <label>ID</label>
-            <input v-model="productData.product_id" type="text" class="form-control ml-sm-2 mr-sm-4 my-2"  required>
+            <input v-model="productData.product_id" type="text" class="form-control ml-sm-2 mr-sm-4 my-2" required>
           </div>
           <div class="form-group">
             <label>Produto</label>
@@ -20,8 +20,7 @@
             <input v-model="productData.product_price" type="text" class="form-control ml-sm-2 mr-sm-4 my-2" required>
           </div>
           <div class="ml-auto text-right">
-            <button type="submit" class="btn btn-primary my-2">Adicionar</button>
-
+            <md-button type="submit" class="md-raised md-primary">Adicionar</md-button>
           </div>
         </form>
       </div>
@@ -59,7 +58,9 @@
                   <td>
                     <span class="icon">
                       <i  @click="onEditSubmit(product.id)" class="fa fa-check"></i>
+
                     </span>
+                    <md-icon>delete</md-icon>
                     <span class="icon">
                       <i  @click="onCancel" class="fa fa-ban"></i>
                     </span>
@@ -141,12 +142,9 @@ export default {
     getProducts() {
       db.collection('products').get().then(querySnapshot =>{
         const products = []
-        // querySnapshot.forEach((doc)=>{
-        //   products.push(doc.data())
-        // })
-
         const productsArray = []
         let i = 0
+
         querySnapshot.forEach((doc)=>{
           productsArray.push(doc.data())
           productsArray[i].id = doc.id
@@ -158,7 +156,6 @@ export default {
         //   productsArray[key].id = querySnapshot.docs[key].id
         //   products.push(productsArray[key])
         // }
-        console.log(products)
         this.products = products
       })
     },
