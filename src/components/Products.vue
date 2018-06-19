@@ -1,5 +1,8 @@
 <template>
+
   <div class="products">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <h3>Produtos</h3>
     <div class="card">
       <div class="card-header">
@@ -58,9 +61,7 @@
                   <td>
                     <span class="icon">
                       <i  @click="onEditSubmit(product.id)" class="fa fa-check"></i>
-
                     </span>
-                    <md-icon>delete</md-icon>
                     <span class="icon">
                       <i  @click="onCancel" class="fa fa-ban"></i>
                     </span>
@@ -77,6 +78,9 @@
                     {{product.product_price}}
                   </td>
                   <td>
+                    <!-- <md-button class="md-icon-button md-primary">
+                      <md-icon class="fa fa-trash"></md-icon>
+                    </md-button> -->
 
                     <a href="#" class="icon">
                       <i v-on:click="onDelete(product.id)" class="fa fa-trash"></i>
@@ -85,11 +89,11 @@
                       <i v-on:click="onEdit(product)" class="fa fa-pencil"></i>
                     </a>
                     <router-link
-                    :to="{
-                      name:'ProductPage',
-                      params:{id: product.id}
-                    }"
-                    class="icon"
+                      :to="{
+                        name:'ProductPage',
+                        params:{id: product.id}
+                      }"
+                      class="icon"
                     >
                       <i class="fa fa-eye"></i>
                     </router-link>
@@ -108,6 +112,8 @@
 
 <script>
 import db from '@/db'
+var R = require('ramda');
+
 export default {
   name: 'Products',
   data () {
@@ -139,9 +145,16 @@ export default {
     }
   },
   methods: {
+    immutable(){
+      //array[i] = R.insert(i, productsArray[i], products)
+      //R.insert(1, productsArray[i], products)
+
+
+    },
     getProducts() {
       db.collection('products').get().then(querySnapshot =>{
         const products = []
+        let array = []
         const productsArray = []
         let i = 0
 
